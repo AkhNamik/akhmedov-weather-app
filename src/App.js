@@ -1,7 +1,6 @@
 import React from "react"
 import Header from "./components/Header"
 import { makeStyles } from "@material-ui/core/styles"
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 import Fab from "@material-ui/core/Fab"
 import Grid from "@material-ui/core/Grid"
 import AddIcon from "@material-ui/icons/Add"
@@ -60,36 +59,30 @@ const App = () => {
       )
     )
   return (
-    <Router>
+    <div>
       <Header />
-      <Switch>
-        <Route path="/homepage" components={App}>
-          <div className={classes.root}>
-            <Grid container spacing={3} className={classes.containerGrid}>
-              {weatherLocations.map((location, index) => (
-                <Grid key={location} xs={12} sm={6} md={4} lg={3} item>
-                  <WeatherCard
-                    location={location}
-                    onDelete={removeAtIndex(index)}
-                    onUpdate={updateAtIndex(index)}
-                  />
-                </Grid>
-              ))}
+      <div className={classes.root}>
+        <Grid container spacing={3} className={classes.containerGrid}>
+          {weatherLocations.map((location, index) => (
+            <Grid key={location} xs={12} sm={6} md={4} lg={3} item>
+              <WeatherCard
+                location={location}
+                onDelete={removeAtIndex(index)}
+                onUpdate={updateAtIndex(index)}
+              />
             </Grid>
-          </div>
-        </Route>
-      </Switch>
-      <Link to="/homepage">
-        <Fab
-          onClick={handleAddClick}
-          aria-label="add weather location"
-          className={classes.addButton}
-          color="secondary"
-        >
-          <AddIcon />
-        </Fab>
-      </Link>
-    </Router>
+          ))}
+        </Grid>             
+      </div>
+      <Fab
+        onClick={handleAddClick}
+        aria-label="add weather location"
+        className={classes.addButton}
+        color="secondary"
+      >
+        <AddIcon />
+      </Fab>
+    </div>
   )
 }
 export default App
